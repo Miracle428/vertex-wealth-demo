@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Create Demo Account - Vertex Wealth</title>
+  <style>
+    body{font-family:Arial,sans-serif;background:#f4f7fb;margin:0;padding:25px 15px}
+    .box{max-width:430px;margin:auto;background:white;padding:28px;border-radius:18px;box-shadow:0 5px 25px #0001}
+    h1{text-align:center}
+    input{width:100%;box-sizing:border-box;padding:14px;margin:8px 0;border:1px solid #ddd;border-radius:9px}
+    button{width:100%;padding:14px;background:#1769e0;color:white;border:0;border-radius:9px;margin-top:10px;font-size:16px}
+    .demo{margin-top:18px;padding:12px;background:#fff3cd;border-radius:9px;font-size:13px;color:#664d03}
+    #msg{text-align:center;margin-top:12px}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Create Demo Account</h1>
+
+    <input id="name" type="text" placeholder="Full name">
+    <input id="email" type="email" placeholder="Email address">
+    <input id="pin" type="password" maxlength="4" inputmode="numeric" placeholder="Choose 4-digit demo PIN">
+
+    <button onclick="createAccount()">Create Demo Account</button>
+
+    <p id="msg"></p>
+
+    <div class="demo">
+      <b>Demo only.</b><br>
+      This website is an educational simulation. It does not accept deposits,
+      process withdrawals, execute real trades, or provide real investment services.
+    </div>
+  </div>
+
+<script>
+function createAccount(){
+  const name=document.getElementById("name").value.trim();
+  const email=document.getElementById("email").value.trim().toLowerCase();
+  const pin=document.getElementById("pin").value.trim();
+  const msg=document.getElementById("msg");
+
+  if(!name || !email || !/^\d{4}$/.test(pin)){
+    msg.textContent="Enter your name, email and a 4-digit PIN.";
+    return;
+  }
+
+  const account={
+    name:name,
+    email:email,
+    pin:pin,
+    balance:0,
+    profit:0,
+    bonus:0
+  };
+
+  localStorage.setItem("vertexDemoAccount",JSON.stringify(account));
+
+  msg.textContent="Demo account created successfully.";
+  setTimeout(()=>location.href="dashboard.html",700);
+}
+</script>
+</body>
+</html>
