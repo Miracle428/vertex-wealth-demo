@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - Vertex Wealth Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main class="container">
+    <div class="card">
+      <h1>Welcome Back</h1>
+      <p class="subtitle">Sign in to your Vertex Wealth demo account.</p>
+
+      <form id="loginForm">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" required>
+
+        <button class="button" type="submit">Sign In</button>
+      </form>
+
+      <p id="message"></p>
+
+      <a class="button secondary" href="signup.html">
+        Create Demo Account
+      </a>
+
+      <div class="notice">
+        <strong>Demo only.</strong><br>
+        This account is for educational simulation only. No real money,
+        deposits, withdrawals, or real trading are supported.
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById("loginForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      const savedUser = JSON.parse(
+        localStorage.getItem("vertexDemoUser")
+      );
+
+      if (!savedUser) {
+        message.textContent = "No demo account found. Please create one first.";
+        return;
+      }
+
+      if (
+        email === savedUser.email &&
+        password === savedUser.password
+      ) {
+        localStorage.setItem("vertexDemoLoggedIn", "true");
+        window.location.href = "dashboard.html";
+      } else {
+        message.textContent = "Incorrect email or password.";
+      }
+    });
+  </script>
+</body>
+</html>
