@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Vertex Wealth Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main class="container">
+    <div class="card">
+      <h1>My Profile</h1>
+      <p class="subtitle">Vertex Wealth Demo Account</p>
+
+      <div class="card" style="margin-top:20px;">
+        <p><strong>Name</strong></p>
+        <p id="name">Loading...</p>
+
+        <p style="margin-top:18px;"><strong>Email</strong></p>
+        <p id="email">Loading...</p>
+
+        <p style="margin-top:18px;"><strong>Account Type</strong></p>
+        <p>Demo Account</p>
+      </div>
+
+      <a class="button" href="dashboard.html">
+        Back to Dashboard
+      </a>
+
+      <button class="button secondary" id="logout">
+        Sign Out
+      </button>
+
+      <div class="notice">
+        This is a demo profile. It does not hold real funds or
+        provide real investment services.
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const loggedIn = localStorage.getItem("vertexDemoLoggedIn");
+    const user = JSON.parse(localStorage.getItem("vertexDemoUser"));
+
+    if (loggedIn !== "true" || !user) {
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("name").textContent = user.name;
+      document.getElementById("email").textContent = user.email;
+    }
+
+    document.getElementById("logout").addEventListener("click", function () {
+      localStorage.removeItem("vertexDemoLoggedIn");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>
