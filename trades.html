@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo Trades - Vertex Wealth</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main class="container">
+    <div class="card">
+      <h1>Demo Trades</h1>
+      <p class="subtitle">Simulated trading activity</p>
+
+      <div class="notice">
+        <strong>Simulation only.</strong><br>
+        These trades are fictional examples and do not represent real
+        transactions or investments.
+      </div>
+
+      <div class="card" style="margin-top:20px;">
+        <h2>Recent Activity</h2>
+
+        <p style="margin-top:15px;">
+          <strong>Demo Stock A</strong><br>
+          Simulated purchase — $1,500.00
+        </p>
+
+        <hr style="margin:18px 0;">
+
+        <p>
+          <strong>Demo Stock B</strong><br>
+          Simulated purchase — $2,000.00
+        </p>
+
+        <hr style="margin:18px 0;">
+
+        <p>
+          <strong>Demo Stock C</strong><br>
+          Simulated sale — $750.00
+        </p>
+      </div>
+
+      <a class="button" href="dashboard.html">Back to Dashboard</a>
+
+      <button class="button secondary" id="logout">
+        Sign Out
+      </button>
+    </div>
+  </main>
+
+  <script>
+    const loggedIn = localStorage.getItem("vertexDemoLoggedIn");
+
+    if (loggedIn !== "true") {
+      window.location.href = "login.html";
+    }
+
+    document.getElementById("logout").addEventListener("click", function() {
+      localStorage.removeItem("vertexDemoLoggedIn");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>
